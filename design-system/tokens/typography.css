@@ -15,21 +15,21 @@
   --display-3-size:36px; --display-3-line:38px; --display-3-track:-0.024em;
 
   /* headings */
-  --head-1-size:28px; --head-1-line:32px; --head-1-track:-0.02em;
-  --head-2-size:22px; --head-2-line:26px; --head-2-track:-0.018em;
-  --head-3-size:18px; --head-3-line:22px; --head-3-track:-0.012em;
+  --head-1-size:30px; --head-1-line:36px; --head-1-track:-0.02em;
+  --head-2-size:22px; --head-2-line:28px; --head-2-track:-0.018em;
+  --head-3-size:20px; --head-3-line:25px; --head-3-track:-0.012em;
 
   /* body / UI */
-  --body-lg-size:17px; --body-lg-line:26px;
-  --body-size:15px;    --body-line:23px;
-  --body-sm-size:13px; --body-sm-line:19px;
-  --label-size:13px;   --label-line:16px; --label-track:0; /* @kind other */
-  --caption-size:11px; --caption-line:14px; --caption-track:0.02em;
+  --body-lg-size:18px; --body-lg-line:28px;
+  --body-size:16px;    --body-line:25px;
+  --body-sm-size:15px; --body-sm-line:22px;
+  --label-size:15px;   --label-line:20px; --label-track:0; /* @kind other */
+  --caption-size:14px; --caption-line:20px; --caption-track:0.02em;
 
   /* eyebrow / overline — uppercase, wide */
-  --eyebrow-size:11px; --eyebrow-line:14px; --eyebrow-track:0.14em;
+  --eyebrow-size:13px; --eyebrow-line:16px; --eyebrow-track:0.085em;
 
   /* numerics */
-  --metric-size:34px; --metric-line:34px; --metric-track:-0.02em;
-  --mono-size:12px;   --mono-line:14px;   --mono-track:0.01em;
+  --metric-size:40px; --metric-line:40px; --metric-track:-0.02em;
+  --mono-size:13px;   --mono-line:16px;   --mono-track:0.01em;
 }

@@ -54,7 +54,7 @@ hype and no motivational filler. It states the rule, then the reason.
 - **Person.** "You" for the member, "we" only for the program's decisions. Never "I".
   → *"You move on when the test says so."* / *"Three answers set your starting phase."*
 - **Casing.** Sentence case everywhere — headings, buttons, labels, nav. The only uppercase
-  is the eyebrow/overline style (`.ap-eyebrow`, 11px, 0.14em) and the wordmark.
+  is the eyebrow/overline style (`.ap-eyebrow`, 13px, 0.085em) and the wordmark.
 - **Length.** Headlines under nine words. Body sentences under twenty. One idea per card.
 - **Numbers are specific and always in the copy, never implied.** `3 x 12 · 3s down`,
   `45min · x04 exercises`, `within 10% of the other side`, `Weeks 3–7`. Doses use `x` for
