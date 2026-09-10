@@ -33,3 +33,24 @@
   --metric-size:40px; --metric-line:40px; --metric-track:-0.02em;
   --mono-size:13px;   --mono-line:16px;   --mono-track:0.01em;
 }
+
+/* Arabic ramp. IBM Plex Sans Arabic reads optically smaller than the Latin
+   faces at equal px, and Arabic is a joined script, so the eyebrow's
+   letter-spacing pulls its letterforms apart. The uppercase transform that
+   marks a Latin eyebrow does nothing here either, so Arabic buys that
+   emphasis with size and weight instead of tracking. */
+[dir="rtl"]{
+  --head-1-size:32px; --head-1-line:42px;
+  --head-2-size:25px; --head-2-line:34px;
+  --head-3-size:22px; --head-3-line:30px;
+
+  --body-lg-size:19px; --body-lg-line:31px;
+  --body-size:17px;    --body-line:28px;
+  --body-sm-size:16px; --body-sm-line:26px;
+  --label-size:16px;   --label-line:24px;
+  --caption-size:15px; --caption-line:23px;
+
+  --eyebrow-size:16px; --eyebrow-line:24px; --eyebrow-track:0;
+
+  --mono-size:14px;   --mono-line:18px;
+}

@@ -49,17 +49,52 @@
     --ease:cubic-bezier(.2,.8,.2,1);
   }
   html, body { background: var(--canvas); color: var(--body); }
-  body { font-size: 16px; line-height: 25px; }
+  html body { font-size: var(--t-base); line-height: var(--t-base-lh); }
   * { -webkit-tap-highlight-color: transparent; }
   html[dir="rtl"] body { font-family: 'IBM Plex Sans Arabic','Instrument Sans',sans-serif; }
   html[dir="rtl"] .font-display { font-family: 'IBM Plex Sans Arabic','Sora',sans-serif; }
 
+  /* ---- type scale ------------------------------------------------------
+     One ramp for Latin, a second for Arabic. IBM Plex Sans Arabic reads
+     optically smaller than Instrument Sans at the same px, Arabic is a
+     joined script so letter-spacing pulls its letterforms apart, and the
+     uppercase transform that marks a Latin eyebrow does nothing there --
+     so Arabic buys that emphasis with size and weight instead. ---------- */
+  :root{
+    --t-eyebrow:14px; --t-eyebrow-lh:18px; --t-eyebrow-track:.07em; --t-eyebrow-weight:600;
+    --t-micro:12px;   --t-micro-lh:16px;
+    --t-meta:13px;    --t-meta-lh:18px;
+    --t-chip:14px;
+    --t-sm:15px;      --t-sm-lh:22px;
+    --t-base:16px;    --t-base-lh:25px;
+    --t-lg:17px;      --t-lg-lh:26px;
+    --t-h3:20px;      --t-h3-lh:26px;
+    --t-h2:22px;      --t-h2-lh:28px;
+  }
+  html[dir="rtl"]{
+    --t-eyebrow:16px; --t-eyebrow-lh:24px; --t-eyebrow-track:0; --t-eyebrow-weight:700;
+    --t-micro:13px;   --t-micro-lh:18px;
+    --t-meta:14px;    --t-meta-lh:20px;
+    --t-chip:15px;
+    --t-sm:16px;      --t-sm-lh:26px;
+    --t-base:17px;    --t-base-lh:28px;
+    --t-lg:19px;      --t-lg-lh:30px;
+    --t-h3:22px;      --t-h3-lh:30px;
+    --t-h2:25px;      --t-h2-lh:34px;
+  }
+  .t-micro{ font-size:var(--t-micro); line-height:var(--t-micro-lh); }
+  .t-meta { font-size:var(--t-meta);  line-height:var(--t-meta-lh); }
+  .t-sm   { font-size:var(--t-sm);    line-height:var(--t-sm-lh); }
+  .t-base { font-size:var(--t-base);  line-height:var(--t-base-lh); }
+  .t-lg   { font-size:var(--t-lg);    line-height:var(--t-lg-lh); }
+  .t-h3   { font-size:var(--t-h3);    line-height:var(--t-h3-lh); }
+
   .num { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
-  .eyebrow { font-size: 13px; line-height: 16px; letter-spacing: .085em; text-transform: uppercase; font-weight: 600; }
+  .eyebrow { font-size: var(--t-eyebrow); line-height: var(--t-eyebrow-lh); letter-spacing: var(--t-eyebrow-track); text-transform: uppercase; font-weight: var(--t-eyebrow-weight); }
 
   /* metric numerals scale with the width they are given */
   .metric { font-size: clamp(44px, 4.4vw, 66px); line-height: .92; font-weight: 600; }
-  .h-step { font-size: 22px; line-height: 28px; letter-spacing: -0.018em; font-weight: 700; }
+  .h-step { font-size: var(--t-h2); line-height: var(--t-h2-lh); letter-spacing: -0.018em; font-weight: 700; }
 
   /* ---- Lucide glyphs, delivered as CSS masks so runtime textContent writes
          can never remove them ---- */
@@ -92,13 +127,13 @@
   .i-lang::before     { --ic: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 8 6 6'/%3E%3Cpath d='m4 14 6-6 2-3'/%3E%3Cpath d='M2 5h12'/%3E%3Cpath d='M7 2h1'/%3E%3Cpath d='m22 22-5-10-5 10'/%3E%3Cpath d='M14 18h6'/%3E%3C/svg%3E"); }
 
   /* 4-up metric row: labels reserve two lines so the numerals share a baseline */
-  @media (min-width: 1280px) { .metric-label { align-items: flex-start; min-height: 32px; } }
+  @media (min-width: 1280px) { .metric-label { align-items: flex-start; min-height: calc(2 * var(--t-eyebrow-lh)); } }
 
   .card { background: var(--card); border: 1px solid var(--hair); border-radius: 18px; box-shadow: inset 0 1px 0 rgba(255,255,255,.06); }
 
   select, input[type="text"] {
     background-color: var(--sunken); border: 1px solid var(--hair); color: var(--body);
-    border-radius: 14px; padding: 12px 15px; width: 100%; font-size: 16px; outline: none;
+    border-radius: 14px; padding: 12px 15px; width: 100%; font-size: var(--t-base); outline: none;
     font-family: inherit; transition: border-color .14s var(--ease);
   }
   select {
@@ -114,7 +149,7 @@
 
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-    border: 1px solid var(--hair); border-radius: 999px; padding: 12px 20px; font-size: 16px;
+    border: 1px solid var(--hair); border-radius: 999px; padding: 12px 20px; font-size: var(--t-base);
     font-weight: 600; background: var(--raised); color: var(--body); font-family: inherit;
     transition: background .14s var(--ease), border-color .14s var(--ease), transform .08s var(--ease);
   }
@@ -123,10 +158,10 @@
   .btn:disabled { opacity: .38; cursor: not-allowed; }
   .btn-accent { background: var(--accent); border-color: var(--accent); color: var(--ink); }
   .btn-accent:hover:not(:disabled) { background: var(--accent-hi); border-color: var(--accent-hi); }
-  .btn-sm { padding: 9px 16px; font-size: 15px; }
+  .btn-sm { padding: 9px 16px; font-size: var(--t-sm); }
 
   .seg { border: 1px solid var(--hair); border-radius: 999px; background: var(--sunken); padding: 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-  .seg button { padding: 10px 8px; font-size: 15px; font-weight: 600; background: transparent; color: var(--muted); border-radius: 999px; font-family: inherit; transition: background .14s var(--ease), color .14s var(--ease); }
+  .seg button { padding: 10px 8px; font-size: var(--t-sm); font-weight: 600; background: transparent; color: var(--muted); border-radius: 999px; font-family: inherit; transition: background .14s var(--ease), color .14s var(--ease); }
   .seg button:hover { color: var(--body); }
   .seg button.on { background: var(--accent); color: var(--ink); }
 
@@ -141,7 +176,7 @@
   .step.is-done .step-num { background: rgba(47,191,113,.16); border-color: rgba(47,191,113,.4); color: #2FBF71; }
 
   .chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 999px;
-    border: 1px solid var(--hair); background: var(--card); color: var(--muted); font-size: 14px; font-weight: 600; white-space: nowrap; }
+    border: 1px solid var(--hair); background: var(--card); color: var(--muted); font-size: var(--t-chip); font-weight: 600; white-space: nowrap; }
   html[dir="rtl"] .chip { padding: 6px 6px 6px 12px; }
   .chip .dot { width: 24px; height: 24px; border-radius: 999px; display: grid; place-items: center;
     font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; background: var(--sunken); color: var(--faint); }
@@ -150,9 +185,9 @@
   .chip.is-done .dot { background: rgba(47,191,113,.16); color: #2FBF71; }
 
   table { border-collapse: collapse; width: 100%; }
-  th, td { padding: 11px 14px; text-align: end; font-size: 15px; border-bottom: 1px solid var(--hair); }
+  th, td { padding: 11px 14px; text-align: end; font-size: var(--t-sm); border-bottom: 1px solid var(--hair); }
   th:first-child, td:first-child { text-align: start; }
-  thead th { color: var(--muted); font-weight: 600; font-size: 12px; letter-spacing: .07em; text-transform: uppercase; }
+  thead th { color: var(--muted); font-weight: var(--t-eyebrow-weight); font-size: var(--t-meta); letter-spacing: var(--t-eyebrow-track); text-transform: uppercase; }
   tbody tr:last-child td { border-bottom: none; }
 
   .scroll::-webkit-scrollbar { width: 8px; }
@@ -172,10 +207,10 @@
   <div class="max-w-[1560px] mx-auto px-4 sm:px-6 h-[60px] flex items-center justify-between gap-4">
     <div class="flex items-baseline gap-3 min-w-0">
       <span class="font-display font-extrabold text-[19px] tracking-[-0.02em] text-white whitespace-nowrap">RSI<span class="text-accent">·</span>LAB</span>
-      <span class="text-[15px] text-muted hidden md:inline truncate" data-i18n="app.tagline">Markerless single-leg drop jump &amp; hop assessment</span>
+      <span class="t-sm text-muted hidden md:inline truncate" data-i18n="app.tagline">Markerless single-leg drop jump &amp; hop assessment</span>
     </div>
     <div class="flex items-center gap-3">
-      <div class="hidden sm:flex items-center gap-2 text-[13px] text-muted">
+      <div class="hidden sm:flex items-center gap-2 t-meta text-muted">
         <span id="fps" class="num px-2.5 py-1 rounded-full bg-sunken border border-white/[.08]">-- fps</span>
         <span id="engine" class="num px-2.5 py-1 rounded-full bg-sunken border border-white/[.08]">engine: loading</span>
       </div>
@@ -189,11 +224,11 @@
   <div class="border-b border-white/[.08]">
     <div class="max-w-[1560px] mx-auto px-4 sm:px-6 py-3 flex items-center gap-2.5 overflow-x-auto scroll">
       <div class="chip" data-chip="1"><span class="dot">01</span><span data-i18n="s1.t">Hardware setup</span></div>
-      <span class="text-faint text-[13px]">/</span>
+      <span class="text-faint t-meta">/</span>
       <div class="chip" data-chip="2"><span class="dot">02</span><span data-i18n="s2.t">Session setup</span></div>
-      <span class="text-faint text-[13px]">/</span>
+      <span class="text-faint t-meta">/</span>
       <div class="chip" data-chip="3"><span class="dot">03</span><span data-i18n="s3.t">Live testing</span></div>
-      <span class="text-faint text-[13px]">/</span>
+      <span class="text-faint t-meta">/</span>
       <div class="chip" data-chip="4"><span class="dot">04</span><span data-i18n="s4.t">Results</span></div>
     </div>
   </div>
@@ -211,33 +246,33 @@
         <canvas id="overlay" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
 
         <div class="absolute top-3 start-3 flex flex-col gap-2 items-start">
-          <div id="badge" class="px-3.5 py-1.5 rounded-full text-[13px] font-bold tracking-[.06em] bg-black/70 backdrop-blur">IDLE</div>
-          <div id="sub" class="px-3 py-1 rounded-full text-[14px] text-muted bg-black/60 backdrop-blur" data-i18n="stage.sub0">Start the camera to begin</div>
+          <div id="badge" class="px-3.5 py-1.5 rounded-full t-meta font-bold tracking-[.06em] bg-black/70 backdrop-blur">IDLE</div>
+          <div id="sub" class="px-3 py-1 rounded-full t-sm text-muted bg-black/60 backdrop-blur" data-i18n="stage.sub0">Start the camera to begin</div>
         </div>
 
-        <div class="absolute top-3 end-3 px-3 py-1.5 rounded-full text-[13px] font-semibold bg-black/70 backdrop-blur border border-white/[.08]">
+        <div class="absolute top-3 end-3 px-3 py-1.5 rounded-full t-meta font-semibold bg-black/70 backdrop-blur border border-white/[.08]">
           <span id="legBadge" class="text-accenthi">LEFT LEG</span>
         </div>
 
         <div id="countdown" class="hidden absolute inset-0 items-center justify-center bg-black/60 backdrop-blur-[2px]">
           <div class="text-center">
             <div id="cdNum" class="text-[96px] leading-none font-display font-extrabold num text-accent">3</div>
-            <div class="text-[16px] text-off mt-4" data-i18n="cd.hint">Stand still, both feet flat on the floor</div>
+            <div class="t-base text-off mt-4" data-i18n="cd.hint">Stand still, both feet flat on the floor</div>
           </div>
         </div>
       </div>
 
-      <div id="msg" class="text-[15px] text-muted min-h-[22px] px-0.5"></div>
+      <div id="msg" class="t-sm text-muted min-h-[22px] px-0.5"></div>
 
       <!-- live metrics -->
       <div class="grid grid-cols-2 xl:grid-cols-4 gap-2.5">
         <div class="card p-4">
           <div class="eyebrow metric-label text-muted ico ico-14 i-timer" data-i18n="m.gct">Ground contact time</div>
-          <div class="mt-3.5 font-display metric num" id="mGCT">—<span class="text-[17px] text-muted font-medium"> ms</span></div>
+          <div class="mt-3.5 font-display metric num" id="mGCT">—<span class="t-lg text-muted font-medium"> ms</span></div>
         </div>
         <div class="card p-4">
           <div class="eyebrow metric-label text-muted ico ico-14 i-up" data-i18n="m.ft">Flight time</div>
-          <div class="mt-3.5 font-display metric num" id="mFT">—<span class="text-[17px] text-muted font-medium"> ms</span></div>
+          <div class="mt-3.5 font-display metric num" id="mFT">—<span class="t-lg text-muted font-medium"> ms</span></div>
         </div>
         <div class="p-4 rounded-card bg-accent text-ink border border-accent">
           <div class="eyebrow metric-label text-ink ico ico-14 i-zap" data-i18n="m.rsi">RSI · reactive strength</div>
@@ -245,7 +280,7 @@
         </div>
         <div class="card p-4">
           <div class="eyebrow metric-label text-muted ico ico-14 i-steps" data-i18n="m.fppa">Peak valgus (FPPA)</div>
-          <div class="mt-3.5 font-display metric num" id="mVAL">—<span class="text-[17px] text-muted font-medium">°</span></div>
+          <div class="mt-3.5 font-display metric num" id="mVAL">—<span class="t-lg text-muted font-medium">°</span></div>
         </div>
       </div>
 
@@ -254,7 +289,7 @@
         <div class="flex items-center justify-between mb-3">
           <div class="eyebrow text-muted ico ico-14 i-signal" data-i18n="sig.title">Live signal</div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-[15px]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 t-sm">
           <div class="flex items-baseline justify-between gap-3 border-b border-white/[.06] pb-1.5"><span class="text-muted" data-i18n="sig.clearance">Foot height above floor</span><span id="clearance" class="num">—</span></div>
           <div class="flex items-baseline justify-between gap-3 border-b border-white/[.06] pb-1.5"><span class="text-muted" data-i18n="sig.conf">Tracking confidence</span><span id="conf" class="num">—</span></div>
           <div class="flex items-baseline justify-between gap-3 border-b border-white/[.06] pb-1.5"><span class="text-muted" data-i18n="sig.thrC">Contact threshold</span><span id="thrC" class="num">—</span></div>
@@ -273,14 +308,14 @@
           <span class="step-num">01</span>
           <div class="min-w-0 flex-1">
             <h2 class="font-display h-step text-white ico i-settings" data-i18n="s1.t">Hardware setup</h2>
-            <p class="text-[16px] leading-[24px] text-muted mt-1" data-i18n="s1.d">Pick the camera and frame the athlete.</p>
+            <p class="t-base text-muted mt-1" data-i18n="s1.d">Pick the camera and frame the athlete.</p>
           </div>
           <span class="step-flag eyebrow text-muted mt-2"></span>
         </div>
 
         <div class="step-body mt-4 flex flex-col gap-3">
           <div>
-            <label class="block text-[15px] text-muted mb-2" for="camSel" data-i18n="lbl.camera">Camera</label>
+            <label class="block t-sm text-muted mb-2" for="camSel" data-i18n="lbl.camera">Camera</label>
             <select id="camSel"><option value="" data-i18n="opt.grant">Grant camera access to list devices</option></select>
           </div>
 
@@ -290,14 +325,14 @@
           </div>
 
           <div>
-            <label class="block text-[15px] text-muted mb-2" for="viewSel" data-i18n="lbl.view">Camera view of the athlete</label>
+            <label class="block t-sm text-muted mb-2" for="viewSel" data-i18n="lbl.view">Camera view of the athlete</label>
             <select id="viewSel">
               <option value="anterior" data-i18n="opt.ant">Anterior (facing the camera)</option>
               <option value="posterior" data-i18n="opt.post">Posterior (facing away)</option>
             </select>
           </div>
 
-          <p class="text-[15px] leading-[22px] text-faint" data-i18n="hint.framing">Whole body in frame, camera level with the knee, square to the athlete, 2.5–3.5 m away.</p>
+          <p class="t-sm text-faint" data-i18n="hint.framing">Whole body in frame, camera level with the knee, square to the athlete, 2.5–3.5 m away.</p>
         </div>
       </section>
 
@@ -307,32 +342,32 @@
           <span class="step-num">02</span>
           <div class="min-w-0 flex-1">
             <h2 class="font-display h-step text-white ico i-clip" data-i18n="s2.t">Session setup</h2>
-            <p class="text-[16px] leading-[24px] text-muted mt-1" data-i18n="s2.d">Athlete details, test limb, and the floor plane.</p>
+            <p class="t-base text-muted mt-1" data-i18n="s2.d">Athlete details, test limb, and the floor plane.</p>
           </div>
           <span class="step-flag eyebrow text-muted mt-2"></span>
         </div>
 
         <div class="step-body mt-4 flex flex-col gap-3">
           <div>
-            <label class="block text-[15px] text-muted mb-2" for="athlete" data-i18n="lbl.athlete">Athlete name or ID</label>
+            <label class="block t-sm text-muted mb-2" for="athlete" data-i18n="lbl.athlete">Athlete name or ID</label>
             <input id="athlete" type="text" placeholder="e.g. A. Hassan / MRN 4417" data-i18n-ph="ph.athlete" />
           </div>
           <div>
-            <label class="block text-[15px] text-muted mb-2" for="clinician" data-i18n="lbl.clinician">Assessing clinician</label>
+            <label class="block t-sm text-muted mb-2" for="clinician" data-i18n="lbl.clinician">Assessing clinician</label>
             <input id="clinician" type="text" placeholder="e.g. Amr — Behind The Injury" data-i18n-ph="ph.clinician" />
           </div>
 
           <div>
-            <label class="block text-[15px] text-muted mb-2" data-i18n="lbl.limb">Active limb</label>
+            <label class="block t-sm text-muted mb-2" data-i18n="lbl.limb">Active limb</label>
             <div class="seg" id="legSeg">
               <button data-leg="left" class="on" data-i18n="btn.left">Testing left</button>
               <button data-leg="right" data-i18n="btn.right">Testing right</button>
             </div>
-            <p class="text-[15px] leading-[22px] text-faint mt-2" data-i18n="hint.limb">Single-leg only. Bilateral landings split force between limbs and invalidate RSI and FPPA.</p>
+            <p class="t-sm text-faint mt-2" data-i18n="hint.limb">Single-leg only. Bilateral landings split force between limbs and invalidate RSI and FPPA.</p>
           </div>
 
           <div>
-            <label class="block text-[15px] text-muted mb-2" for="involvedSel" data-i18n="lbl.involved">Involved limb (for LSI)</label>
+            <label class="block t-sm text-muted mb-2" for="involvedSel" data-i18n="lbl.involved">Involved limb (for LSI)</label>
             <select id="involvedSel">
               <option value="left" data-i18n="opt.invLeft">Left is involved</option>
               <option value="right" data-i18n="opt.invRight">Right is involved</option>
@@ -340,17 +375,17 @@
           </div>
 
           <div>
-            <label class="flex items-baseline justify-between text-[15px] text-muted mb-2" for="sens">
+            <label class="flex items-baseline justify-between t-sm text-muted mb-2" for="sens">
               <span data-i18n="lbl.sens">Contact sensitivity</span>
               <span id="sensVal" class="num text-off">1.00×</span>
             </label>
             <input id="sens" type="range" min="0.5" max="2.5" step="0.05" value="1" class="w-full" />
-            <p class="text-[15px] leading-[22px] text-faint mt-2" data-i18n="hint.sens">Lower = tighter threshold (more sensitive, more noise). Raise it if contacts trigger from foot roll or motion blur.</p>
+            <p class="t-sm text-faint mt-2" data-i18n="hint.sens">Lower = tighter threshold (more sensitive, more noise). Raise it if contacts trigger from foot roll or motion blur.</p>
           </div>
 
           <div class="pt-1">
             <button id="btnCal" class="btn btn-accent w-full ico ico-16 i-target" disabled data-i18n="btn.cal">Calibrate floor (3 s)</button>
-            <div id="calInfo" class="mt-2 text-[15px] leading-[22px] text-faint" data-i18n="cal.none">Floor not calibrated.</div>
+            <div id="calInfo" class="mt-2 t-sm text-faint" data-i18n="cal.none">Floor not calibrated.</div>
           </div>
         </div>
       </section>
@@ -361,19 +396,19 @@
           <span class="step-num">03</span>
           <div class="min-w-0 flex-1">
             <h2 class="font-display h-step text-white ico i-activity" data-i18n="s3.t">Live testing</h2>
-            <p class="text-[16px] leading-[24px] text-muted mt-1" data-i18n="s3.d">Arm the trial, then run the drop jump.</p>
+            <p class="t-base text-muted mt-1" data-i18n="s3.d">Arm the trial, then run the drop jump.</p>
           </div>
           <span class="step-flag eyebrow text-muted mt-2"></span>
         </div>
 
         <div class="step-body mt-4">
           <button id="btnTrial" class="btn btn-accent w-full ico ico-16 i-play" disabled data-i18n="btn.arm">Arm trial</button>
-          <ol class="mt-3 flex flex-col gap-1.5 text-[16px] leading-[24px] text-muted">
-            <li class="flex gap-2.5"><span class="num text-faint text-[12px] pt-1">01</span><span data-i18n="proto.1">Drop from the box onto the test limb.</span></li>
-            <li class="flex gap-2.5"><span class="num text-faint text-[12px] pt-1">02</span><span data-i18n="proto.2">Jump immediately for maximum height.</span></li>
-            <li class="flex gap-2.5"><span class="num text-faint text-[12px] pt-1">03</span><span data-i18n="proto.3">Land on the same limb and hold 1 s.</span></li>
+          <ol class="mt-3 flex flex-col gap-1.5 t-base text-muted">
+            <li class="flex gap-2.5"><span class="num text-faint t-micro pt-1">01</span><span data-i18n="proto.1">Drop from the box onto the test limb.</span></li>
+            <li class="flex gap-2.5"><span class="num text-faint t-micro pt-1">02</span><span data-i18n="proto.2">Jump immediately for maximum height.</span></li>
+            <li class="flex gap-2.5"><span class="num text-faint t-micro pt-1">03</span><span data-i18n="proto.3">Land on the same limb and hold 1 s.</span></li>
           </ol>
-          <p class="text-[15px] leading-[22px] text-faint mt-3" data-i18n="proto.hint">Space arms a trial · L and R switch the test limb · C reopens calibration.</p>
+          <p class="t-sm text-faint mt-3" data-i18n="proto.hint">Space arms a trial · L and R switch the test limb · C reopens calibration.</p>
         </div>
       </section>
 
@@ -386,7 +421,7 @@
       <span class="step-num">04</span>
       <div class="min-w-0 flex-1">
         <h2 class="font-display h-step text-white ico i-trend" data-i18n="s4.t">Results</h2>
-        <p class="text-[16px] leading-[24px] text-muted mt-1" data-i18n="s4.d">Trial log, limb symmetry, and the clinic report.</p>
+        <p class="t-base text-muted mt-1" data-i18n="s4.d">Trial log, limb symmetry, and the clinic report.</p>
       </div>
       <span class="step-flag eyebrow text-muted mt-2"></span>
     </div>
@@ -427,7 +462,7 @@
       <div class="min-w-0">
         <div class="flex items-center justify-between gap-3 mb-2">
           <div class="eyebrow text-muted ico ico-14 i-scale" data-i18n="lsi.title">Limb symmetry</div>
-          <div id="lsiFlag" class="text-[15px] text-muted">—</div>
+          <div id="lsiFlag" class="t-sm text-muted">—</div>
         </div>
         <div class="rounded-field border border-white/[.08] bg-sunken overflow-hidden">
           <table>
@@ -442,12 +477,12 @@
             <tbody id="cmpBody"></tbody>
           </table>
         </div>
-        <p class="text-[15px] leading-[22px] text-faint mt-3" data-i18n="hint.lsi">LSI = involved ÷ uninvolved × 100. Flagged when outside 90–110%. Contact time and FPPA are inverse metrics: lower is better, so an LSI above 110% is the deficit.</p>
+        <p class="t-sm text-faint mt-3" data-i18n="hint.lsi">LSI = involved ÷ uninvolved × 100. Flagged when outside 90–110%. Contact time and FPPA are inverse metrics: lower is better, so an LSI above 110% is the deficit.</p>
       </div>
     </div>
   </section>
 
-  <footer class="pt-6 pb-10 text-[15px] leading-[23px] text-faint max-w-[72ch]" data-i18n="footer">
+  <footer class="pt-6 pb-10 t-sm text-faint max-w-[72ch]" data-i18n="footer">
     Single-camera, markerless estimation. Timing resolution is bounded by the capture frame rate: at 30 fps a contact event carries roughly ±16 ms of uncertainty before sub-frame interpolation. FPPA is a 2D projection and is only valid when the camera is level with the athlete's knee, square to the frontal plane, and 2.5–3.5 m away. Use for tracking change within an athlete, not against force-plate norms. Not medical advice.
   </footer>
 </main>
@@ -459,11 +494,11 @@
     <div class="flex items-start gap-3">
       <div class="mt-0.5 shrink-0 w-9 h-9 rounded-full border border-accent flex items-center justify-center text-accent font-display font-bold">!</div>
       <div class="min-w-0">
-        <h2 id="calModalTitle" class="font-display font-bold text-[20px] leading-[26px] text-white" data-i18n="cal.title">Check the athlete's position</h2>
-        <p id="calModalBody" class="mt-2 text-[16px] leading-[25px] text-off" data-i18n="cal.body">
+        <h2 id="calModalTitle" class="font-display font-bold t-h3 text-white" data-i18n="cal.title">Check the athlete's position</h2>
+        <p id="calModalBody" class="mt-2 t-base text-off" data-i18n="cal.body">
           Ensure athlete is standing flat on the clinic floor, NOT on the plyo box.
         </p>
-        <p class="mt-2 text-[16px] leading-[24px] text-muted" data-i18n="cal.note">
+        <p class="mt-2 t-base text-muted" data-i18n="cal.note">
           The next 3 seconds set the floor plane for every contact and flight measurement in this session. Calibrating on the box shifts the plane upward and invalidates all trials.
         </p>
       </div>
