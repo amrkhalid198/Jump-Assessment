@@ -1,0 +1,14 @@
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--text-body);font-family:var(--font-ui);font-size:var(--body-size);line-height:var(--body-line);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--font-display);color:var(--text-primary);margin:0;font-weight:var(--weight-bold)}
+h1{font-size:var(--head-1-size);line-height:var(--head-1-line);letter-spacing:var(--head-1-track)}
+h2{font-size:var(--head-2-size);line-height:var(--head-2-line);letter-spacing:var(--head-2-track)}
+h3{font-size:var(--head-3-size);line-height:var(--head-3-line);letter-spacing:var(--head-3-track)}
+p{margin:0;text-wrap:pretty}
+a{color:var(--text-accent);text-decoration:none;transition:color var(--dur-fast) var(--ease-standard)}
+a:hover{color:var(--orange-300)}
+button{font:inherit;color:inherit}
+::selection{background:var(--orange-a32);color:var(--white)}
+:focus-visible{outline:var(--focus-width) solid var(--focus-ring);outline-offset:var(--focus-offset)}
+.ap-eyebrow{font-family:var(--font-ui);font-size:var(--eyebrow-size);line-height:var(--eyebrow-line);letter-spacing:var(--eyebrow-track);text-transform:uppercase;font-weight:var(--weight-semibold);color:var(--text-muted)}
+.ap-mono{font-family:var(--font-mono);font-size:var(--mono-size);letter-spacing:var(--mono-track);font-variant-numeric:tabular-nums}

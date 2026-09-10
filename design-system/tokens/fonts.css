@@ -1,0 +1,7 @@
+/* Fonts. No binaries shipped with the source material, so these are Google Fonts
+   substitutions chosen to match the palette sheet's grotesque and the app
+   reference's UI type. Swap the src urls when real files arrive.
+   Archivo  → headings/display (tight grotesque, matches the sheet's caps)
+   Figtree  → UI + body
+   JetBrains Mono → timers, reps, IDs, tabular data */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');

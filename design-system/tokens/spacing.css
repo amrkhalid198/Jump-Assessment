@@ -1,0 +1,29 @@
+:root{
+  /* 4px base; 2px available for hairline nudges */
+  --space-0:0px;
+  --space-1:2px;
+  --space-2:4px;
+  --space-3:8px;
+  --space-4:12px;
+  --space-5:16px;
+  --space-6:20px;
+  --space-7:24px;
+  --space-8:32px;
+  --space-9:40px;
+  --space-10:48px;
+  --space-11:64px;
+  --space-12:80px;
+  --space-13:120px;
+
+  /* recurring composites, measured off the app reference */
+  --gutter-screen:16px;      /* phone screen side padding */
+  --gutter-section:24px;
+  --card-pad:16px;
+  --card-pad-tight:12px;
+  --card-gap:10px;           /* gap between stacked cards */
+  --row-min-height:44px;     /* min hit target */
+  --tabbar-height:64px;
+  --topbar-height:52px;
+  --container-max:1160px;
+  --measure:66ch;
+}
