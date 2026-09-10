@@ -5,8 +5,42 @@ import { updateSession, copyCookies } from '@/lib/supabase/middleware';
 // magic links, and no /reset because this system sends no mail at all.
 const PUBLIC_ROUTES = ['/login', '/signup'];
 
+/**
+ * Fail closed, and say why.
+ *
+ * Without Supabase credentials createServerClient throws, and every route
+ * returns an opaque 500 — on a fresh deploy that reads as "the app is broken"
+ * rather than "one setting is missing". Refusing every request with a
+ * diagnostic is both safer (nothing is reachable unauthenticated) and honest.
+ */
+function missingConfig() {
+  const missing = [
+    !process.env.NEXT_PUBLIC_SUPABASE_URL && 'NEXT_PUBLIC_SUPABASE_URL',
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY && 'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+  ].filter(Boolean);
+  return missing.length ? missing : null;
+}
+
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
+
+  const missing = missingConfig();
+  if (missing) {
+    const body = [
+      'RSI Lab is not configured.',
+      '',
+      'Missing environment variable(s):',
+      ...missing.map((name) => '  ' + name),
+      '',
+      'Set these in Vercel: Project Settings > Environment Variables,',
+      'then redeploy. See rsi-lab-saas/.env.example.',
+    ].join('\n');
+
+    return new NextResponse(body, {
+      status: 503,
+      headers: { 'content-type': 'text/plain; charset=utf-8' },
+    });
+  }
 
   // The billing webhook authenticates with a provider signature, not a cookie.
   // Running it through session refresh would be pointless at best; at worst a
@@ -52,10 +86,9 @@ export const config = {
    * redirect, and the app silently stops working offline — with no error that
    * points anywhere near auth.
    *
-   * Subscription state is deliberately NOT checked here. Middleware runs on
-   * every request and a DB round-trip per navigation is a tax on all of them;
-   * worse, entitlement in middleware is easy to get subtly wrong. Gate it in
-   * the /dashboard layout, where you are already loading the clinic, and rely
+   * Access state is deliberately NOT checked here. Middleware runs on every
+   * request and a DB round-trip per navigation is a tax on all of them. Gate
+   * it in the /dashboard layout, where the clinic is already loaded, and rely
    * on the RLS write policies as the real enforcement boundary.
    */
   matcher: [
