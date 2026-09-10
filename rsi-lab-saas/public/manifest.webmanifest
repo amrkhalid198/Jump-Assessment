@@ -1,0 +1,10 @@
+{
+  "name": "RSI Lab",
+  "short_name": "RSI Lab",
+  "description": "Markerless single-leg drop jump and hop assessment.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#0B0B0B",
+  "theme_color": "#0B0B0B",
+  "orientation": "any"
+}

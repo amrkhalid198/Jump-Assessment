@@ -1,0 +1,27 @@
+{
+  "name": "rsi-lab-saas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "node --test src/**/*.test.js",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhook",
+    "audit": "node --test src/lib/biomech/fsm.test.js && next lint --dir src && next build"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "^0.10.14",
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.45.4",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "stripe": "^17.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.15"
+  }
+}
